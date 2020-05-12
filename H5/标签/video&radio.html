@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 视频 -->
+    <video id="v" style="width: 500px;height: 400px;" loop="true" controls>
+        <source src="./snow.mp4" type="video/mp4">
+        <source src="./snow.ogg" type="video/ogg">
+    </video>
+    <input type="button" id="btn" value="播放" onclick="play()">
+    <input type="button" id="btn" value="暂停" onclick="pause()">
+    <input type="button" name="" id="" value="play/pause" onclick="plpa()"> 
+    <input type="button" name="" id="" value="快进" onclick='fast()'>
+    <input type="button" name="" id="" value="静音" onclick='music()'>
+    <input type="button" name="" id="" value="倍速" onclick='play2()'>
+    <input type="button" name="" id="" value="慢" onclick='playslow()'>
+    <!-- 音频 -->
+    <audio controls="controls" id="a"> 
+        <source src="./winter.mp3" type="audio/mpeg"/> 
+        <source src="./winter.ogg" type="audio/ogg"/> 
+    </audio>
+    <script>
+        var v=document.getElementById('v');
+        var btn=document.getElementById('btn');
+        
+        // btn.onclick=function(){
+        //     v.play();
+        // }
+        function play(){
+            v.play();
+        }
+        function pause(){
+            v.pause();
+        }
+        //一个键播放暂停
+        function plpa(){
+            if(v.paused){
+                v.play()
+            }else{
+                v.pause()
+            }
+        }
+        //快进
+        function fast(){
+            v.currentTime+=5
+        }
+        //快进键盘
+        document.onkeydown=function(event){
+            var e=event || window.event;
+            //右箭头
+            if(e&&e.keyCode==39){
+                v.currentTime+=2
+                //v.currentTime!==v.duration?v.currentTime+=2
+            }
+            //下
+            else if(e&&e.keyCode==40){
+                v.volume-=0.1
+            }
+            //空格
+            else if(e&&e.keyCode==32){
+                v.paused==true?v.play():v.pause()
+            }
+        }
+        //静音
+        function music(){
+            if(v.muted==false){
+                v.muted=true
+            }else{
+                v.muted=false
+            }
+        }
+        //倍速播放
+        function play2(){
+            v.playbackRate=2
+        }
+        function playslow(){
+            v.playbackRate=0.5
+        }
+    </script>
+</body>
+</html>
